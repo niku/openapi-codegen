@@ -6,6 +6,7 @@
     "devDependencies": {
         "prettier": "1.10.2",
         "tslint": "^5.9.1",
+        "tslint-config-prettier": "^1.8.0",
         "typescript": "^2.7.2"
     }
 }

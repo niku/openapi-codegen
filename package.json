@@ -10,5 +10,11 @@
         "tslint": "^5.9.1",
         "tslint-config-prettier": "^1.8.0",
         "typescript": "^2.7.2"
+    },
+    "scripts": {
+        "precommit": "lint-staged"
+    },
+    "lint-staged": {
+        "*.ts": ["prettier --write", "git add"]
     }
 }

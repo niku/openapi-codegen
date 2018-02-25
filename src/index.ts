@@ -1,6 +1,6 @@
 import fs from "fs";
-import yaml from "js-yaml";
 import process from "process";
+import Loader from "./loader";
 
 const [execPath, javascriptFilePath, inputPath, ...rest] = process.argv;
 
@@ -12,7 +12,7 @@ fs.readFile(inputPath, "utf8", (err, data) => {
   }
 
   try {
-    const doc = yaml.safeLoad(data);
+    const doc = new Loader().load(data);
     // tslint:disable-next-line:no-console
     console.log(doc);
   } catch (e) {

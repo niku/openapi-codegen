@@ -1,8 +1,13 @@
 import yaml from "js-yaml";
 
 export default class Loader {
-  public readonly load: (str: string) => any;
-  constructor(load = yaml.safeLoad) {
-    this.load = load;
+  private readonly loader: typeof yaml;
+
+  constructor(loader = yaml) {
+    this.loader = loader;
+  }
+
+  public safeLoad(str: string, opts?: yaml.LoadOptions): any {
+    return this.loader.safeLoad(str, opts);
   }
 }

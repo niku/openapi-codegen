@@ -1,0 +1,15 @@
+openapi: "3.0.0"
+info:
+  title: Minimal API Specification
+  version: "0.0.1"
+paths:
+  /hello:
+    get:
+      responses:
+        "200":
+          description: greeting
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: hello!

@@ -16,11 +16,11 @@ export default class Generator {
   {{@../../key}} "{{@../../../key}}" do
     send_resp(conn, {{@../key}}, "{{example}}")
   end
+
         {{/each}}
       {{/each}}
     {{/each}}
   {{/each}}
-
   match _ do
     send_resp(conn, 404, "oops")
   end

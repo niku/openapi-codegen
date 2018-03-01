@@ -11,14 +11,22 @@ export default class Generator {
 
   {{#each openAPI.paths}}
     {{#each this}}
-      {{#each responses}}
-        {{#each content}}
+      {{#x-elixir-plug-code}}
+  {{@key}} "{{@../key}}" do
+    {{{this}}}
+  end
+
+      {{/x-elixir-plug-code}}
+      {{^x-elixir-plug-code}}
+        {{#each responses}}
+          {{#each content}}
   {{@../../key}} "{{@../../../key}}" do
     send_resp(conn, {{@../key}}, "{{example}}")
   end
 
+          {{/each}}
         {{/each}}
-      {{/each}}
+      {{/x-elixir-plug-code}}
     {{/each}}
   {{/each}}
   match _ do

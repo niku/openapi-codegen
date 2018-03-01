@@ -56,7 +56,8 @@ it("generates json data to a code", () => {
               },
               description: "greet to a user"
             }
-          }
+          },
+          "x-elixir-plug-code": 'send_resp(conn, 200, "hello #{name}!")'
         }
       }
     }
@@ -74,7 +75,7 @@ it("generates json data to a code", () => {
   end
 
   post "/hello" do
-    send_resp(conn, 200, "hello, niku!")
+    send_resp(conn, 200, "hello #{name}!")
   end
 
   match _ do

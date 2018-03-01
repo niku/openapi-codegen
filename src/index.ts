@@ -12,7 +12,7 @@ fs.readFile(inputPath, "utf8", (err, data) => {
   }
 
   try {
-    const doc = new Loader().load(data);
+    const doc = new Loader().safeLoad(data);
     // tslint:disable-next-line:no-console
     console.log(doc);
   } catch (e) {

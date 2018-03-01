@@ -1,6 +1,7 @@
 import fs from "fs";
 import process from "process";
 import Loader from "./loader";
+import Generator from "./generator";
 
 const [execPath, javascriptFilePath, inputPath, ...rest] = process.argv;
 
@@ -12,7 +13,11 @@ fs.readFile(inputPath, "utf8", (err, data) => {
   }
 
   try {
-    const doc = new Loader().safeLoad(data);
+    const obj = new Loader().safeLoad(data);
+    const doc = new Generator().generate({
+      moduleName: "MyModule",
+      openAPI: obj
+    });
     // tslint:disable-next-line:no-console
     console.log(doc);
   } catch (e) {

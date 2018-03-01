@@ -1,7 +1,7 @@
 import fs from "fs";
 import process from "process";
-import Loader from "./loader";
 import Generator from "./generator";
+import Loader from "./loader";
 
 const [execPath, javascriptFilePath, inputPath, ...rest] = process.argv;
 

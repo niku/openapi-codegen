@@ -1,9 +1,17 @@
 import fs from "fs";
 import process from "process";
+import CodeGeneratingUnit from "./code_generating_unit";
+import CodeGeneratingUnitType from "./code_generating_unit_type";
 import Generator from "./generator";
 import Loader from "./loader";
 
-const [execPath, javascriptFilePath, inputPath, ...rest] = process.argv;
+const [
+  execPath,
+  javascriptFilePath,
+  inputPath,
+  codeGeneratingUnitType,
+  ...rest
+] = process.argv;
 
 fs.readFile(inputPath, "utf8", (err, data) => {
   if (err) {
@@ -14,6 +22,9 @@ fs.readFile(inputPath, "utf8", (err, data) => {
 
   try {
     const obj = new Loader().safeLoad(data);
+    const codeGeneratingUnit = new CodeGeneratingUnit(
+      new CodeGeneratingUnitType(codeGeneratingUnitType)
+    );
     const doc = new Generator().generate({
       moduleName: "MyModule",
       openAPI: obj

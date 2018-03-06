@@ -27,10 +27,7 @@ fs.readFile(inputPath, "utf8", (err, data) => {
       new CodeGeneratingUnitType(codeGeneratingUnitType),
       new CodeGeneratingConfig({ moduleName: "MyModule" })
     );
-    const doc = new Generator().generate({
-      moduleName: "MyModule",
-      openAPI: obj
-    });
+    const doc = codeGeneratingUnit.generate(obj);
     // tslint:disable-next-line:no-console
     console.log(doc);
   } catch (e) {

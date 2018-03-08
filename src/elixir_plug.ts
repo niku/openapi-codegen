@@ -84,6 +84,29 @@ end
           }
         });
       });
+
+      // replace mix.exs
+      const mixPath = `${this.config.path}/mix.exs`;
+      fs.readFile(mixPath, "utf8", (err, data) => {
+        if (err) {
+          // tslint:disable-next-line:no-console
+          return console.log(err);
+        }
+
+        const result = data.replace(
+          /# {:dep_from_git, git: "https:\/\/github.com\/elixir-lang\/my_dep.git", tag: "0\.1\.0"},/g,
+          `# {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"},
+      {:cowboy, "~> 2.2.2"},
+      {:plug, "~> 1.5.0-rc.2"}`
+        );
+
+        fs.writeFile(mixPath, result, e => {
+          if (e) {
+            // tslint:disable-next-line:no-console
+            return console.log(err);
+          }
+        });
+      });
     });
   }
 }

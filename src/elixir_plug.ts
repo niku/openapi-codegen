@@ -47,19 +47,42 @@ end
   public generate(openAPI: any): void {
     process.chdir("tmp");
     const command = `mix new ${this.config.path} --sup`;
-    const moduleName =
-      this.config.path.charAt(0).toUpperCase() +
-      this.config.path.slice(1) +
-      "." +
-      "Router";
+    const appName =
+      this.config.path.charAt(0).toUpperCase() + this.config.path.slice(1);
+    const moduleName = appName + "." + "Router";
     child_process.exec(command, (error, stdout, strerr) => {
       this.generators.forEach(generator => {
-        const path = `${this.config.path}/lib/${this.config.path}/router.ex`;
+        const routerPath = `${this.config.path}/lib/${
+          this.config.path
+        }/router.ex`;
         fs.writeFile(
-          path,
+          routerPath,
           generator.generate({ openAPI, moduleName }),
           err => null
         );
+      });
+
+      // replace application.ex
+      const applicationPath = `${this.config.path}/lib/${
+        this.config.path
+      }/application.ex`;
+      fs.readFile(applicationPath, "utf8", (err, data) => {
+        if (err) {
+          // tslint:disable-next-line:no-console
+          return console.log(err);
+        }
+        const result = data.replace(
+          /# {Foo.Worker, arg},/g,
+          `# {Foo.Worker, arg},
+      {Plug.Adapters.Cowboy2, scheme: :http, plug: ${appName}.Router}`
+        );
+
+        fs.writeFile(applicationPath, result, e => {
+          if (e) {
+            // tslint:disable-next-line:no-console
+            return console.log(err);
+          }
+        });
       });
     });
   }

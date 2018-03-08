@@ -1,7 +1,5 @@
 import fs from "fs";
 import process from "process";
-import CodeGeneratingConfig from "./code_generating_config";
-import CodeGeneratingUnitType from "./code_generating_unit_type";
 import Generator from "./generator";
 import Generators from "./generators";
 import Loader from "./loader";
@@ -10,7 +8,7 @@ const [
   execPath,
   javascriptFilePath,
   inputPath,
-  codeGeneratingUnitType,
+  typeOfGenerator,
   ...rest
 ] = process.argv;
 
@@ -23,10 +21,9 @@ fs.readFile(inputPath, "utf8", (err, data) => {
 
   try {
     const obj = new Loader().safeLoad(data);
-    const codeGeneratingUnit = new Generators(
-      new CodeGeneratingUnitType(codeGeneratingUnitType),
-      new CodeGeneratingConfig({ moduleName: "MyModule" })
-    );
+    const codeGeneratingUnit = new Generators(typeOfGenerator, {
+      moduleName: "MyModule"
+    });
     const doc = codeGeneratingUnit.generate(obj);
     // tslint:disable-next-line:no-console
     console.log(doc);

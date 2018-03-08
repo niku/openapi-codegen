@@ -1,3 +1,4 @@
+import ElixirPlug from "./elixir_plug";
 import Generator from "./generator";
 
 export default class Generators {
@@ -10,10 +11,6 @@ export default class Generators {
   }
 
   public generate(openAPI: any): any {
-    const moduleName = this.config.moduleName;
-    return new Generator().generate({
-      moduleName,
-      openAPI
-    });
+    new ElixirPlug(this.config).generate(openAPI);
   }
 }

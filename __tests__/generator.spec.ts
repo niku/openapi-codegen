@@ -62,8 +62,38 @@ it("generates json data to a code", () => {
       }
     }
   };
+  const template = `defmodule {{moduleName}} do
+  use Plug.Router
+
+  plug :match
+  plug :dispatch
+
+  {{#each openAPI.paths}}
+    {{#each this}}
+      {{#x-elixir-plug-code}}
+  {{@key}} "{{@../key}}" do
+    {{{this}}}
+  end
+
+      {{/x-elixir-plug-code}}
+      {{^x-elixir-plug-code}}
+        {{#each responses}}
+          {{#each content}}
+  {{@../../key}} "{{@../../../key}}" do
+    send_resp(conn, {{@../key}}, "{{example}}")
+  end
+
+          {{/each}}
+        {{/each}}
+      {{/x-elixir-plug-code}}
+    {{/each}}
+  {{/each}}
+  match _ do
+    send_resp(conn, 404, "oops")
+  end
+end`;
   const moduleName = "MyRouter";
-  expect(new Generator().generate({ openAPI, moduleName }))
+  expect(new Generator(template).generate({ openAPI, moduleName }))
     .toBe(`defmodule MyRouter do
   use Plug.Router
 

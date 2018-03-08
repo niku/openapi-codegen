@@ -4,13 +4,7 @@ import Generator from "./generator";
 import Generators from "./generators";
 import Loader from "./loader";
 
-const [
-  execPath,
-  javascriptFilePath,
-  inputPath,
-  typeOfGenerator,
-  ...rest
-] = process.argv;
+const [execPath, javascriptFilePath, inputPath, type, ...rest] = process.argv;
 
 fs.readFile(inputPath, "utf8", (err, data) => {
   if (err) {
@@ -21,10 +15,10 @@ fs.readFile(inputPath, "utf8", (err, data) => {
 
   try {
     const obj = new Loader().safeLoad(data);
-    const codeGeneratingUnit = new Generators(typeOfGenerator, {
-      moduleName: "MyModule"
+    const generators = new Generators(type, {
+      path: "foo"
     });
-    const doc = codeGeneratingUnit.generate(obj);
+    const doc = generators.generate(obj);
     // tslint:disable-next-line:no-console
     console.log(doc);
   } catch (e) {

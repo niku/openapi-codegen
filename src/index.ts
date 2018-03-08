@@ -1,9 +1,9 @@
 import fs from "fs";
 import process from "process";
 import CodeGeneratingConfig from "./code_generating_config";
-import CodeGeneratingUnit from "./code_generating_unit";
 import CodeGeneratingUnitType from "./code_generating_unit_type";
 import Generator from "./generator";
+import Generators from "./generators";
 import Loader from "./loader";
 
 const [
@@ -23,7 +23,7 @@ fs.readFile(inputPath, "utf8", (err, data) => {
 
   try {
     const obj = new Loader().safeLoad(data);
-    const codeGeneratingUnit = new CodeGeneratingUnit(
+    const codeGeneratingUnit = new Generators(
       new CodeGeneratingUnitType(codeGeneratingUnitType),
       new CodeGeneratingConfig({ moduleName: "MyModule" })
     );

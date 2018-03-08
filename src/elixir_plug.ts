@@ -10,6 +10,8 @@ export default class ElixirPlug {
   private template = `defmodule {{moduleName}} do
   use Plug.Router
 
+  plug Plug.Parsers, parsers: [:urlencoded, :multipart]
+
   plug :match
   plug :dispatch
 

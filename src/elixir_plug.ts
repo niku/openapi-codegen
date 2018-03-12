@@ -6,6 +6,7 @@ import Generator from "./generator";
 
 export default class ElixirPlug {
   private readonly generators: Generator[];
+  private readonly outputPath: string;
   private readonly config: any;
   private template = `defmodule {{moduleName}} do
   use Plug.Router
@@ -41,13 +42,14 @@ export default class ElixirPlug {
 end
 `;
 
-  constructor(config: any) {
+  constructor(outputPath: string, config: any) {
+    this.outputPath = outputPath;
     this.config = config;
     this.generators = [new Generator(this.template)];
   }
 
   public generate(openAPI: any): void {
-    process.chdir("tmp");
+    process.chdir(this.outputPath);
     const command = `mix new ${this.config.path} --sup`;
     const appName =
       this.config.path.charAt(0).toUpperCase() + this.config.path.slice(1);

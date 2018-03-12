@@ -3,7 +3,14 @@ import process from "process";
 import Generators from "./generators";
 import Loader from "./loader";
 
-const [execPath, javascriptFilePath, inputPath, type, ...cs] = process.argv;
+const [
+  execPath,
+  javascriptFilePath,
+  inputPath,
+  outputPath,
+  type,
+  ...cs
+] = process.argv;
 const config: any = {};
 
 // Parse config in the argv
@@ -33,7 +40,7 @@ fs.readFile(inputPath, "utf8", (err, data) => {
 
   try {
     const obj = new Loader().safeLoad(data);
-    const generators = new Generators(type, config);
+    const generators = new Generators(type, outputPath, config);
     const doc = generators.generate(obj);
     // tslint:disable-next-line:no-console
     console.log(doc);

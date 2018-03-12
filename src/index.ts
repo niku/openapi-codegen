@@ -1,6 +1,5 @@
 import fs from "fs";
 import process from "process";
-import Generator from "./generator";
 import Generators from "./generators";
 import Loader from "./loader";
 

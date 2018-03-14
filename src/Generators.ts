@@ -1,6 +1,3 @@
-import ElixirPlug from "./ElixirPlug";
-import Generator from "./Generator";
-
 export default class Generators {
   private readonly type: string;
   private readonly outputPath: string;
@@ -13,6 +10,12 @@ export default class Generators {
   }
 
   public generate(openAPI: any): any {
-    new ElixirPlug(this.outputPath, this.config).generate(openAPI);
+    const modulePath = `./${this.type}`;
+    import(modulePath)
+      .then(({ default: module }) => {
+        new module(this.outputPath, this.config).generate(openAPI);
+      })
+      // tslint:disable-next-line:no-console
+      .catch(e => console.log(e));
   }
 }

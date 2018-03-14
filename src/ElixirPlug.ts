@@ -2,7 +2,7 @@ import child_process from "child_process";
 import fs from "fs";
 import Handlebars from "handlebars";
 import process from "process";
-import Generator from "./generator";
+import Generator from "./Generator";
 
 export default class ElixirPlug {
   private readonly generators: Generator[];

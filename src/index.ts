@@ -1,7 +1,7 @@
 import fs from "fs";
 import process from "process";
-import Generators from "./generators";
-import Loader from "./loader";
+import Generators from "./Generators";
+import Loader from "./Loader";
 
 const [
   execPath,

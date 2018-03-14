@@ -1,5 +1,5 @@
-import ElixirPlug from "./elixir_plug";
-import Generator from "./generator";
+import ElixirPlug from "./ElixirPlug";
+import Generator from "./Generator";
 
 export default class Generators {
   private readonly type: string;

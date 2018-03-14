@@ -1,4 +1,4 @@
-import Generator from "../src/generator";
+import Generator from "../src/Generator";
 
 it("generates json data to a code", () => {
   const openAPI = {

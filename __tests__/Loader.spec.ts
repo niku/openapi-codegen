@@ -1,5 +1,5 @@
 import fs from "fs";
-import Loader from "../src/loader";
+import Loader from "../src/Loader";
 
 it("loads yaml data to match a json object", () => {
   const path = "__tests__/fixtures/minimal.yaml";

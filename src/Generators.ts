@@ -1,16 +1,16 @@
 export default class Generators {
-  private readonly type: string;
+  private readonly moduleName: string;
   private readonly outputPath: string;
   private readonly config: any;
 
-  constructor(type: string, outputPath: string, config: any) {
-    this.type = type;
+  constructor(moduleName: string, outputPath: string, config: any) {
+    this.moduleName = moduleName;
     this.outputPath = outputPath;
     this.config = config;
   }
 
   public generate(openAPI: any): any {
-    const modulePath = `./${this.type}`;
+    const modulePath = `./${this.moduleName}`;
     import(modulePath)
       .then(({ default: module }) => {
         new module(this.outputPath, this.config).generate(openAPI);

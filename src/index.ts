@@ -8,7 +8,7 @@ const [
   javascriptFilePath,
   inputPath,
   outputPath,
-  type,
+  moduleName,
   ...cs
 ] = process.argv;
 const config: any = {};
@@ -40,7 +40,7 @@ fs.readFile(inputPath, "utf8", (err, data) => {
 
   try {
     const obj = new Loader().safeLoad(data);
-    const generators = new Generators(type, outputPath, config);
+    const generators = new Generators(moduleName, outputPath, config);
     const doc = generators.generate(obj);
     // tslint:disable-next-line:no-console
     console.log(doc);

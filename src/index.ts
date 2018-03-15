@@ -9,13 +9,13 @@ const [
   inputPath,
   outputPath,
   moduleName,
-  ...cs
+  ...configs
 ] = process.argv;
 const config: any = {};
 
 // Parse config in the argv
 try {
-  cs.forEach(c => {
+  configs.forEach(c => {
     // tslint:disable-next-line:no-console
     console.log(c);
     const [key, value] = c.split("=", 2);

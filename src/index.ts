@@ -9,27 +9,33 @@ const [
   inputPath,
   outputPath,
   moduleName,
-  ...configs
+  ...rest
 ] = process.argv;
-const config: any = {};
+
+function buildConfigFromArguments(...configs: string[]): any {
+  const result: any = {};
+  try {
+    configs.forEach(c => {
+      // tslint:disable-next-line:no-console
+      console.log(c);
+      const [key, value] = c.split("=", 2);
+      if (value) {
+        result[key] = value;
+      } else {
+        // tslint:disable-next-line:no-console
+        console.warn(`It can't split by "=": ${c}`);
+      }
+    });
+  } catch (e) {
+    // tslint:disable-next-line:no-console
+    console.log(e);
+  }
+
+  return result;
+}
 
 // Parse config in the argv
-try {
-  configs.forEach(c => {
-    // tslint:disable-next-line:no-console
-    console.log(c);
-    const [key, value] = c.split("=", 2);
-    if (value) {
-      config[key] = value;
-    } else {
-      // tslint:disable-next-line:no-console
-      console.warn(`It can't split by "=": ${c}`);
-    }
-  });
-} catch (e) {
-  // tslint:disable-next-line:no-console
-  console.log(e);
-}
+const config: any = buildConfigFromArguments(...rest);
 
 fs.readFile(inputPath, "utf8", (err, data) => {
   if (err) {

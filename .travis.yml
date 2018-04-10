@@ -1,0 +1,7 @@
+language: java
+
+sudo: false
+dist: trusty
+
+before_install:
+  - cp -p gradle/wrapper/gradle-wrapper.properties.stored gradle/wrapper/gradle-wrapper.properties

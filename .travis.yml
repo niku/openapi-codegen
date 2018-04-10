@@ -5,3 +5,7 @@ dist: trusty
 
 before_install:
   - cp -p gradle/wrapper/gradle-wrapper.properties.stored gradle/wrapper/gradle-wrapper.properties
+
+script:
+  - ./gradlew check
+  - ./gradlew shadowJar && java -jar build/libs/openapi-codegen-all.jar

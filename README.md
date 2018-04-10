@@ -11,6 +11,8 @@ https://github.com/niku/openapi-codegen.git
 cp -p gradle/wrapper/gradle-wrapper.properties.stored gradle/wrapper/gradle-wrapper.properties
 # test
 ./gradlew check
+# run
+./gradlew shadowJar && java -jar build/libs/openapi-codegen-all.jar
 ```
 
 # Troubleshooting

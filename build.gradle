@@ -10,6 +10,7 @@ plugins {
     // Apply the java-library plugin to add support for Java Library
     id 'java-library'
     id 'com.github.johnrengelman.shadow' version '2.0.3'
+    id 'findbugs'
 }
 
 dependencies {
@@ -39,4 +40,18 @@ jar {
 
 test {
     useJUnitPlatform()
+}
+
+//
+// Findbugs settings
+//
+findbugs {
+    toolVersion = '3.0.1'
+}
+
+tasks.withType(FindBugs) {
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
 }

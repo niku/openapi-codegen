@@ -20,7 +20,8 @@ dependencies {
     implementation 'com.google.guava:guava:23.0'
 
     // Use JUnit test framework
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.1.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.1.0'
 }
 
 // In this section you declare where to find the dependencies of your project
@@ -34,4 +35,8 @@ jar {
     manifest {
         attributes 'Main-Class': 'App'
     }
+}
+
+test {
+    useJUnitPlatform()
 }

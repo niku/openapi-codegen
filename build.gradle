@@ -13,6 +13,7 @@ plugins {
     id 'findbugs'
     id 'checkstyle'
     id 'pmd'
+    id 'jacoco'
 }
 
 dependencies {
@@ -74,4 +75,11 @@ pmd {
             'category/java/bestpractices.xml',
             'category/java/errorprone.xml'
     ]
+}
+
+//
+// Jacoco settings
+//
+jacoco {
+    toolVersion = '0.8.1'
 }

@@ -12,6 +12,7 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '2.0.3'
     id 'findbugs'
     id 'checkstyle'
+    id 'pmd'
 }
 
 dependencies {
@@ -62,4 +63,15 @@ tasks.withType(FindBugs) {
 //
 checkstyle {
     toolVersion = '8.8'
+}
+
+//
+// PMD settings
+//
+pmd {
+    toolVersion = '6.2.0'
+    ruleSets = [
+            'category/java/bestpractices.xml',
+            'category/java/errorprone.xml'
+    ]
 }
